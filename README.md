@@ -38,7 +38,7 @@ Scope: EU27 plus Norway, Switzerland and the UK; public charging for passenger c
 | [European Alternative Fuels Observatory (EAFO)](https://alternative-fuels-observatory.ec.europa.eu/) | Public charging points (AC/DC), BEV market share, AFIR target attainment |
 | Eurostat `road_eqr_carpda` | New passenger car registrations by type of motor energy |
 | Eurostat `road_eqs_carpda` | Passenger car fleet (stock) by type of motor energy |
-| Eurostat `demo_pjan`, `nama_10_pc`, `nrg_pc_204` | Population, GDP per capita, household electricity prices |
+| Eurostat `tps00001`, `nama_10_pc`, `nrg_pc_204` | Population, GDP per capita, household electricity prices |
 
 Details on each file are in [`data/README.md`](data/README.md).
 
