@@ -76,22 +76,56 @@ Missing data appears as missing rows, not as empty values.
 - **Use:** margin potential in the scoring
 - **Issues:** two values per year (S1 and S2) → use the annual average or the latest semester; bands marked "pre-2007" are an old methodology, exclude them
 
-### EAFO — public recharging points (total, AC, DC)
+### `eafo_recharging_points_2026-09.csv` — public recharging points
 
-*To fill in.* Snapshot at September 2026, not a time series.
+- **Source:** [EAFO, country comparison](https://alternative-fuels-observatory.ec.europa.eu/transport-mode/road/eu27-uk-norway-iceland-switzerland-turkey-liechtenstein), chart "Recharging points (EVSE)", downloaded 2026-11-03
+- **What it measures:** publicly accessible recharging points by AFIR power category
+- **Unit:** number of recharging points
+- **Reference date:** September 2026 (snapshot, not a time series)
+- **Countries:** 33 (EU27, Iceland, Liechtenstein, Norway, Switzerland, Turkey, UK)
+- **Format:** wide, one row per country (`Category`) and one column per power category:
 
-### EAFO — alternative fuel market share
+| Column | Type |
+| --- | --- |
+| Slow AC, single-phase (P < 7.4 kW) | AC |
+| Medium-speed AC, triple-phase (7.4–22 kW) | AC |
+| Fast AC, triple-phase (P > 22 kW) | AC |
+| Slow DC (P < 50 kW) | DC |
+| Fast DC (50–150 kW) | DC |
+| Level 1 ultra-fast DC (150–350 kW) | DC |
+| Level 2 ultra-fast DC (P ≥ 350 kW) | DC |
 
-*To fill in.* January–August 2026 (some countries up to September); BEV shown separately.
+- **Use:** total, AC and DC points per country; BEVs per point; share of fast charging
+- **Issues:** 4 empty cells (no points in that category); needs unpivoting in Power Query
 
-### EAFO — AFIR fleet-based target
+### `eafo_af_market_share_2026-ytd.csv` — alternative fuel market share
 
-*To fill in.* Fleet as of Q1 2026, infrastructure as of May 2026.
+- **Source:** EAFO, country comparison, chart "AF market share of total registrations (M1&N1)", downloaded 2026-11-03
+- **What it measures:** share of new registrations by fuel type
+- **Unit:** % of all new passenger cars and vans
+- **Reference period:** January–August 2026 (12 EU countries up to September)
+- **Countries:** 33
+- **Columns:** `Category` (country), `BEV`, `PHEV`, `H2`, `LPG`, `CNG`, `LNG`
+- **Use:** latest BEV share (2026), which Eurostat does not have yet
+- **Issues:** includes vans (N1), unlike Eurostat; many empty cells in H2, LPG, CNG and LNG (no or negligible registrations)
+
+### `eafo_afir_target_2026-05.csv` — AFIR fleet-based target
+
+- **Source:** [EAFO, target tracker](https://alternative-fuels-observatory.ec.europa.eu/transport-mode/road/european-union-eu27/target-tracker), chart "Total power output per AFIR fleet-based target", downloaded 2026-11-03
+- **What it measures:** public charging power installed vs. the AFIR minimum (1.3 kW per BEV + 0.8 kW per PHEV in the fleet)
+- **Unit:** kW
+- **Reference date:** fleet Q1 2026, infrastructure May 2026
+- **Countries:** EU27 only
+- **Columns:** `Category` (country), `Target kW`, `Total power (kW) output`
+- **Use:** installed power / target ratio as the supply-gap indicator
+- **Issues:** no data for Norway, Switzerland, UK, Iceland, Liechtenstein or Turkey; for those, compute an equivalent from the fleet and charging points data
 
 ---
 
 ## Cross-source issues
 
-- **Country names:** Eurostat and EAFO both use full names, but some may differ (e.g. Czechia / Czech Republic, Türkiye / Turkey). A mapping table will be needed in Power Query.
-- **Aggregates:** remove rows such as `European Union - 27 countries (from 2020)` and `Euro area…` before analysis.
+- **Country names:** EAFO uses `Czech Republic` and `Turkey`; Eurostat uses `Czechia` and `Türkiye`. All other names match. A mapping table will be needed in Power Query.
+- **Format:** Eurostat files are long (one row per value); EAFO files are wide (one column per category) and need unpivoting.
+- **Aggregates:** remove rows such as `European Union - 27 countries (from 2020)` and `Euro area…` from Eurostat files before analysis.
 - **Reference dates:** Eurostat data runs to 2025; EAFO data is 2026. Note this in every chart that mixes both.
+- **Scope:** EAFO market share includes vans (M1 + N1); Eurostat registrations are passenger cars only.AFO data is 2026. Note this in every chart that mixes both.
