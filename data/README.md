@@ -124,8 +124,10 @@ Missing data appears as missing rows, not as empty values.
 
 ## Cross-source issues
 
-- **Country names:** EAFO uses `Czech Republic` and `Turkey`; Eurostat uses `Czechia` and `Türkiye`. All other names match. A mapping table will be needed in Power Query.
-- **Format:** Eurostat files are long (one row per value); EAFO files are wide (one column per category) and need unpivoting.
-- **Aggregates:** remove rows such as `European Union - 27 countries (from 2020)` and `Euro area…` from Eurostat files before analysis.
+- **Scope:** analysis limited to EU27. Norway, Switzerland and the UK are excluded because AFIR does not apply to them and their data is incomplete (no AFIR tracker data, missing GDP in PPS for Switzerland and the UK, electricity prices missing for Switzerland and only up to 2020 for the UK).
+- **Country names:** EAFO uses `Czech Republic`; Eurostat uses `Czechia`. All other EU27 names match. Handled with the `tbl_countries` mapping table in Power Query.
+- **Format:** Eurostat files are long (one row per value); EAFO files are wide (one column per category).
+- **Aggregates:** rows such as `European Union - 27 countries (from 2020)` and `Euro area…` are removed by the inner join with `tbl_countries`.
 - **Reference dates:** Eurostat data runs to 2025; EAFO data is 2026. Note this in every chart that mixes both.
-- **Scope:** EAFO market share includes vans (M1 + N1); Eurostat registrations are passenger cars only.AFO data is 2026. Note this in every chart that mixes both.
+- **Vehicle types:** EAFO market share includes vans (M1 + N1); Eurostat registrations are passenger cars only.
+- **PHEV gaps:** many countries only report plug-in hybrids separately from 2020–2022 onwards (registrations) and up to 2022 (fleet). These are left as null, not zero. BEV and total series are complete for all EU27 countries 2016–2025. PHEV data is complete from 2023.
