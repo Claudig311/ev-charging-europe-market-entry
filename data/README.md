@@ -131,3 +131,39 @@ Missing data appears as missing rows, not as empty values.
 - **Reference dates:** Eurostat data runs to 2025; EAFO data is 2026. Note this in every chart that mixes both.
 - **Vehicle types:** EAFO market share includes vans (M1 + N1); Eurostat registrations are passenger cars only.
 - **PHEV gaps:** many countries only report plug-in hybrids separately from 2020–2022 onwards (registrations) and up to 2022 (fleet). These are left as null, not zero. BEV and total series are complete for all EU27 countries 2016–2025. PHEV data is complete from 2023.
+- ---
+
+## Processed tables
+
+Built in Power Query in `data/processed/data_prep.xlsx`. Country filter and name mapping come from the `tbl_countries` sheet (EU27).
+
+### `country_year` — one row per country and year (27 countries × 2016–2025 = 270 rows)
+
+| Column | Meaning | Unit | Source |
+| --- | --- | --- | --- |
+| `country` | Country name (Eurostat style) | — | — |
+| `year` | Year | — | — |
+| `bev_reg` | New battery electric cars registered | cars | road_eqr_carpda |
+| `phev_reg` | New plug-in hybrid cars registered (petrol + diesel) | cars | road_eqr_carpda |
+| `total_reg` | All new passenger cars registered | cars | road_eqr_carpda |
+| `bev_fleet` | Battery electric cars in circulation at year end | cars | road_eqs_carpda |
+| `phev_fleet` | Plug-in hybrid cars in circulation at year end | cars | road_eqs_carpda |
+| `total_fleet` | All passenger cars in circulation at year end | cars | road_eqs_carpda |
+| `population` | Population on 1 January | persons | tps00001 |
+| `gdp_pps_pc` | GDP per capita, current prices | PPS | nama_10_pc |
+| `elec_price_eur_kwh` | Household electricity price, band DC, all taxes, average of S1 and S2 | EUR/kWh | nrg_pc_204 |
+
+**Validation:** column totals reconciled against the raw files.
+
+### `country_snapshot` — one row per country (27 rows), 2026 data from EAFO
+
+| Column | Meaning | Unit |
+| --- | --- | --- |
+| `country`, `eafo_name`, `iso2` | Country name (Eurostat / EAFO style) and ISO code | — |
+| `ac_slow` … `dc_ultra_350` | Public recharging points by AFIR power category | points |
+| `ac_points`, `dc_points` | Total AC and DC public recharging points | points |
+| `hpc_points` | High power charging points (≥150 kW) | points |
+| `total_points` | All public recharging points | points |
+| `bev_share_2026`, `phev_share_2026` | Share of new registrations (cars + vans), Jan–Aug 2026 | fraction (0.2045 = 20.45%) |
+| `afir_target_kw` | Minimum public charging power required by AFIR | kW |
+| `installed_kw` | Public charging power installed | kW |
