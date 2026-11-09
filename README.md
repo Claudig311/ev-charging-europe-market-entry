@@ -2,7 +2,7 @@
 
 Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, market sizing and Power BI dashboard.
 
-> **Status:** work in progress. Data preparation, indicators, screening and scoring are complete. Sensitivity analysis, market sizing and dashboard are next.
+> **Status:** work in progress. Data preparation, indicators, screening, scoring and sensitivity analysis are complete. Market sizing, dashboard and deck are next.
 
 ## The client question
 
@@ -25,7 +25,7 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 | 4 | Ireland | 0.547 | Largest gaps in HPC and AFIR compliance, but the smallest market with slow growth |
 | 5 | Belgium | 0.522 | Strong growth, but charging power already 3× the AFIR minimum |
 
-*Results are preliminary until the sensitivity analysis confirms the ranking holds under different weights and method choices.*
+**Robustness:** across nine weight and method scenarios, only four countries ever reach the top 3: Denmark (8 of 9 scenarios), the Netherlands (7), Portugal (6) and Ireland (6). Denmark and the Netherlands are robust; the third place is contested between Portugal and Ireland and will be decided by market sizing.
 
 **Early findings**
 
@@ -65,9 +65,39 @@ Shortlist: Austria, Belgium, Denmark, Finland, France, Germany, Ireland, Italy, 
 
 Each indicator is normalised 0–1 across the 11 candidates (min-max) and combined with the weights. All thresholds and weights are editable cells in the model's `assumptions` sheet.
 
-### 5. Next steps
-- Sensitivity analysis: does the top 3 hold under different weights and method choices?
-- Market sizing for the top 3, 2026–2030, in low, base and high scenarios.
+### 5. Sensitivity analysis
+
+The ranking was recalculated under six weight scenarios and three method scenarios:
+
+| Scenario | What changes |
+| --- | --- |
+| Base | Weights 30 / 25 / 20 / 15 / 10 |
+| Equal | 20% each criterion |
+| Growth-led | 40% demand growth |
+| Supply-gap-led | 40% HPC supply gap |
+| Size-led | 40% market size |
+| Purchasing-power-led | 30% purchasing power |
+| No log | Market size on a linear scale |
+| No cap | Ireland's GDP not capped |
+| Neither | Linear size and uncapped GDP |
+
+| Country | Times in top 3 (of 9) | Worst rank |
+| --- | --- | --- |
+| Denmark | 8 | 4 |
+| Netherlands | 7 | 4 |
+| Portugal | 6 | 5 |
+| Ireland | 6 | 7 |
+| All others | 0 | — |
+
+**Findings**
+
+- **Denmark is the most robust candidate:** it only drops to 4th when the HPC supply gap gets 40% of the weight.
+- **The Netherlands depends on capping Ireland's GDP:** without the cap, Irish GDP compresses everyone else's purchasing power score and the Netherlands falls to 4th. The cap is justified (Irish GDP is inflated by multinational profits) but changes the result, so it is disclosed here.
+- **Portugal and Ireland cannot be separated by the scoring.** The GDP cap works against both: without it, Portugal rises to 2nd and Ireland to 3rd (or 1st if size is also linear). Ireland is the riskier choice: it falls to 7th when market size is weighted heavily, while Portugal never falls below 5th.
+- **Germany never reaches the top 3:** its best result is 5th, with 40% of the weight on market size.
+  
+### 6. Next steps
+- Market sizing for the four finalists (Denmark, the Netherlands, Portugal, Ireland), 2026–2030, in low, base and high scenarios, used as the tie-breaker between Portugal and Ireland.
 - Power BI dashboard and executive summary deck.
 
 ## Limitations
