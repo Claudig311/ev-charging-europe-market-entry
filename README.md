@@ -2,7 +2,7 @@
 
 Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, market sizing and Power BI dashboard.
 
-> **Status:** work in progress. Data preparation, indicators, screening, scoring and sensitivity analysis are complete. Market sizing, dashboard and deck are next.
+> **Status:** work in progress. Analysis complete (data, screening, scoring, sensitivity, market sizing). Power BI dashboard and executive summary deck are next.
 
 ## The client question
 
@@ -27,6 +27,15 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 
 **Robustness:** across nine weight and method scenarios, only four countries ever reach the top 3: Denmark (8 of 9 scenarios), the Netherlands (7), Portugal (6) and Ireland (6). Denmark and the Netherlands are robust; the third place is contested between Portugal and Ireland and will be decided by market sizing.
 
+## Recommendation
+
+**Enter the Netherlands and Denmark first, with Portugal as the third market.**
+
+- **Netherlands:** the largest public fast-charging market of the finalists (€351M in 2030, base case), with a large HPC gap despite the densest AC network in the EU. Competition from established operators is the main risk.
+- **Denmark:** the most robust candidate in the scoring (top 3 in 8 of 9 scenarios and 74% of 1,000 random weight sets), with the fastest BEV growth. Smaller market (€188M in 2030) and the lowest fast-charging price of the finalists.
+- **Portugal:** wins the tie-break with Ireland on market size (€126M vs €96M in 2030, base case, and larger in every scenario), with the largest HPC gap in the shortlist.
+- **Ireland:** the high-risk, high-reward option. It ranks first most often in random weight simulations but is the smallest market and the most sensitive to assumptions.
+  
 **Early findings**
 
 - **Charging network size is misleading.** The Netherlands has the densest network in the EU (2.8 BEVs per point), but only 3% of points are DC and there are 112 BEVs per HPC point, so a fast-charging gap remains.
@@ -108,17 +117,52 @@ The ranking was recalculated under six weight scenarios and three method scenari
 | Germany | 15% | 6% |
 
 Random weights confirm the same top group and break the Portugal–Ireland tie in favour of Ireland. Ireland ranks first most often but is the most volatile: it is the high-risk, high-reward option, while Denmark is the safe choice.
-  
-### 6. Next steps
-- Market sizing for the four finalists (Denmark, the Netherlands, Portugal, Ireland), 2026–2030, in low, base and high scenarios, used as the tie-breaker between Portugal and Ireland.
-- Power BI dashboard and executive summary deck.
 
+### 6. Market sizing (finalists)
+
+Public DC charging market value, 2026–2030, in low, base and high scenarios.
+
+**Method:** BEV fleet is projected from 2025 by adding new BEV registrations each year (total registrations held at 2025 levels × BEV share rising linearly to a 2030 target). Market value = average BEV fleet × km per year × kWh per km × public DC share of charging energy × DC price per kWh.
+
+| Market 2030 (M€) | Low | Base | High |
+| --- | --- | --- | --- |
+| Netherlands | 213 | 351 | 511 |
+| Denmark | 120 | 188 | 260 |
+| Portugal | 72 | 126 | 192 |
+| Ireland | 53 | 96 | 150 |
+
+At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M in the Netherlands, €9.4M in Denmark, €6.3M in Portugal and €4.8M in Ireland.
+
+**Key assumptions**
+
+| Assumption | Value | Source |
+| --- | --- | --- |
+| Distance per car per year | EU average 10,800 km; Ireland 17,000 km | [ODYSSEE-MURE](https://www.odyssee-mure.eu/publications/efficiency-by-sector/transport/distance-travelled-by-car.html) (2023) |
+| BEV energy consumption | 19.1 kWh/100 km (real-world average) | [EV Database](https://ev-database.org/cheatsheet/energy-consumption-electric-car) |
+| DC charging price (median, incl. VAT) | DK €0.51 · NL €0.70 · PT €0.68 · IE €0.71 per kWh | [Eleport Price Report](https://eleport.com/price-report/) (October 2026) |
+| Public DC share of charging energy | 10% / 15% / 20% | Estimate based on [BCG](https://web-assets.bcg.com/18/4f/edb337e546b4b2897ef61efdcef5/bcg-what-electric-vehicle-owners-really-want-from-charging-networks-jan-2023.pdf) and [IEA Global EV Outlook 2026](https://www.iea.org/reports/global-ev-outlook-2026/electric-vehicle-charging-chap-6-and-10) |
+| BEV share of new registrations in 2030 | DK 75/85/95% · NL 50/65/80% · PT 30/45/60% · IE 25/40/55% | Own assumption, anchored on the EU 2030 CO2 target for new cars ([status](https://observatory.clean-hydrogen.europa.eu/eu-policy/co2-emission-performance-standards-passenger-cars-and-light-commercial-vehicles)) |
+| VoltaCharge target share | 5% of the market in 2030 | Own assumption |
+
+**Findings**
+
+- **Portugal's market is 28–36% larger than Ireland's in every scenario**, assuming both evolve along comparable scenarios: it has more than twice the BEV fleet and almost twice the annual car sales. Ireland's higher mileage only partly offsets this.
+- **The Netherlands is the largest market, 1.8–2.0× Denmark.**
+- **Attractiveness and size point in different directions:** Denmark leads the scoring but is a smaller market with the cheapest fast charging. The choice between the two depends on competitive intensity and entry cost, which are not modelled.
+  
+### 7. Next steps
+- Power BI dashboard and executive summary deck.
+- Possible extensions: country-specific target shares based on competition, entry cost (capex per HPC site) and payback.
+- 
 ## Limitations
 
 - **Different reference dates:** BEV fleet is end-2025 (Eurostat); charging points are September 2026 (EAFO). BEVs per point is slightly understated for every country, so comparisons remain valid.
 - **Electricity price is not scored:** a higher price can mean both higher revenue and higher energy costs for the operator. It is kept as context only.
 - **PHEV data gaps:** many countries only report plug-in hybrids separately from 2020–2022 onwards. The analysis relies on BEV data, which is complete.
 - **Competition is not scored directly:** the AFIR gap and HPC gap are used as proxies for how under-served each market is.
+- **Market sizing uses constant 2026 prices including VAT:** values reflect what drivers spend, not the operator's net revenue.
+- **A uniform 5% target share** ignores differences in competition between countries; it likely overstates what a new entrant can win in the Netherlands.
+- **BEV fleet projection** ignores scrappage (the fleet is young) and holds total car registrations at 2025 levels. Denmark, the Netherlands and Portugal use the EU average mileage.
 
 ## Data sources
 
