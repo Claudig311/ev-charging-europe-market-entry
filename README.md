@@ -95,6 +95,19 @@ The ranking was recalculated under six weight scenarios and three method scenari
 - **The Netherlands depends on capping Ireland's GDP:** without the cap, Irish GDP compresses everyone else's purchasing power score and the Netherlands falls to 4th. The cap is justified (Irish GDP is inflated by multinational profits) but changes the result, so it is disclosed here.
 - **Portugal and Ireland cannot be separated by the scoring.** The GDP cap works against both: without it, Portugal rises to 2nd and Ireland to 3rd (or 1st if size is also linear). Ireland is the riskier choice: it falls to 7th when market size is weighted heavily, while Portugal never falls below 5th.
 - **Germany never reaches the top 3:** its best result is 5th, with 40% of the weight on market size.
+
+**Monte Carlo (1,000 random weight sets, uniform Dirichlet)**
+
+| Country | % of simulations in top 3 | % ranked first |
+| --- | --- | --- |
+| Denmark | 74% | 31% |
+| Netherlands | 69% | 16% |
+| Ireland | 64% | 35% |
+| Portugal | 48% | 12% |
+| Belgium | 15% | 0% |
+| Germany | 15% | 6% |
+
+Random weights confirm the same top group and break the Portugal–Ireland tie in favour of Ireland. Ireland ranks first most often but is the most volatile: it is the high-risk, high-reward option, while Denmark is the safe choice.
   
 ### 6. Next steps
 - Market sizing for the four finalists (Denmark, the Netherlands, Portugal, Ireland), 2026–2030, in low, base and high scenarios, used as the tie-breaker between Portugal and Ireland.
