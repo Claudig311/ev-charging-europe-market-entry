@@ -32,7 +32,7 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 **Enter the Netherlands and Denmark first, with Portugal as the third market.**
 
 - **Netherlands:** the largest public fast-charging market of the finalists (€351M in 2030, base case), with a large HPC gap despite the densest AC network in the EU. Competition from established operators is the main risk.
-- **Denmark:** the most robust candidate in the scoring (top 3 in 8 of 9 scenarios and 74% of 1,000 random weight sets), with the fastest BEV growth. Smaller market (€188M in 2030) and the lowest fast-charging price of the finalists.
+- **Denmark:** the most robust candidate in the scoring (top 3 in 8 of 9 scenarios and75% of 1,000 random weight sets), with the fastest BEV growth. Smaller market (€188M in 2030) and the lowest fast-charging price of the finalists.
 - **Portugal:** wins the tie-break with Ireland on market size (€126M vs €96M in 2030, base case, and larger in every scenario), with the largest HPC gap in the shortlist.
 - **Ireland:** the high-risk, high-reward option. It ranks first most often in random weight simulations but is the smallest market and the most sensitive to assumptions.
   
@@ -109,12 +109,13 @@ The ranking was recalculated under six weight scenarios and three method scenari
 
 | Country | % of simulations in top 3 | % ranked first |
 | --- | --- | --- |
-| Denmark | 74% | 31% |
-| Netherlands | 69% | 16% |
-| Ireland | 64% | 35% |
-| Portugal | 48% | 12% |
-| Belgium | 15% | 0% |
+| Denmark | 75% | 29% |
+| Netherlands | 68% | 18% |
+| Ireland | 65% | 35% |
+| Portugal | 49% | 12% |
 | Germany | 15% | 6% |
+| Belgium | 13% | 0% |
+| France | 12% | 1% |
 
 Random weights confirm the same top group and break the Portugal–Ireland tie in favour of Ireland. Ireland ranks first most often but is the most volatile: it is the high-risk, high-reward option, while Denmark is the safe choice.
 
