@@ -2,7 +2,7 @@
 
 Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, market sizing and Power BI dashboard.
 
-> **Status:** work in progress. Analysis complete (data, screening, scoring, sensitivity, market sizing). Power BI dashboard and executive summary deck are next.
+> **Status:** work in progress. Analysis complete (data, screening, scoring, sensitivity, market sizing). Power BI dashboard in progress (2 of 3 pages); executive summary deck next.
 
 ## The client question
 
@@ -42,6 +42,18 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 - **Ireland is the only shortlisted country below the AFIR minimum** (0.94): a clear supply gap, but also a sign that grid connections or permitting may be slowing investment.
 - **Germany is the largest market (2.0 million BEVs) but not the most attractive:** growth slowed to 5% a year after subsidies ended in December 2023, and its HPC coverage is already better than in most candidates. It ranks 7th.
 - **High BEV sales share does not mean a saturated market.** BEVs are 68% of new car sales in Denmark, but only about 90 per 1,000 inhabitants: the fleet will keep electrifying for years.
+
+## Dashboard
+
+Interactive Power BI report: [`dashboard/ev_market_entry.pbix`](dashboard/ev_market_entry.pbix)
+
+| Page | Question it answers | Main visuals |
+| --- | --- | --- |
+| 1. Overview | Where is EV demand growing, and where is fast charging lagging behind? | EU27 KPIs, map of BEVs per HPC point, growth vs HPC gap scatter |
+| 2. Ranking | Which markets are most attractive, and how robust is the ranking? | Score breakdown by criterion, Monte Carlo robustness, ranking summary table |
+| 3. Finalists | How big is the prize? | *Coming soon* |
+
+Data model: a star schema with a country dimension (`dim_country`) linked to Eurostat, EAFO, scoring and market sizing tables; DAX measures for fleet, charging points and ratios.
 
 ## Approach
 
@@ -184,10 +196,11 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 │   └── README.md                 # data notes and data dictionary
 ├── model/
 │   └── market_entry_model.xlsx   # assumptions, indicators, screening, scoring, notes
-├── dashboard/                    # Power BI file and screenshots (coming soon)
-└── deck/                         # executive summary slides (coming soon)
+├── dashboard/
+│   ├── ev_market_entry.pbix      # Power BI report
+│   └── screenshots/              # page screenshots (coming soon)
 ```
 
 ## Tools
 
-Excel (Power Query, XLOOKUP, SUMIFS, RRI, dynamic arrays, conditional formatting) · Power BI (coming soon)
+Power BI (Power Query, star schema, DAX measures)
