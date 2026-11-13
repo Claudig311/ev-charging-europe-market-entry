@@ -1,8 +1,8 @@
 # Where should an EV charging operator expand in Europe?
 
-Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, market sizing and Power BI dashboard.
+Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, sensitivity analysis, market sizing and Power BI dashboard.
 
-> **Status:** work in progress. Analysis complete (data, screening, scoring, sensitivity, market sizing). Power BI dashboard in progress (2 of 3 pages); executive summary deck next.
+> **Status:** analysis and Power BI dashboard complete. Executive summary deck next.
 
 ## The client question
 
@@ -15,7 +15,23 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 
 **Hypothesis to test:** the most attractive markets are not the ones with the most electric cars today, but the ones where demand grows fast and fast-charging supply lags behind.
 
-## Preliminary results (base case)
+## Recommendation
+
+**Enter the Netherlands and Denmark first, with Portugal as the third market.**
+
+- **Netherlands:** the largest public fast-charging market of the finalists (€351M in 2030, base case), with a large HPC gap despite the densest AC network in the EU. Competition from established operators is the main risk.
+- **Denmark:** the most robust candidate in the scoring (top 3 in 8 of 9 scenarios and 75% of 1,000 random weight sets), with the fastest BEV growth. Smaller market (€188M in 2030) and the lowest fast-charging price of the finalists.
+- **Portugal:** wins the tie-break with Ireland on market size (€126M vs €96M in 2030, base case, and larger in every scenario), with the largest HPC gap in the shortlist.
+- **Ireland:** the high-risk, high-reward option. It ranks first most often in random weight simulations but is the smallest market and the most sensitive to assumptions.
+
+**Key findings**
+
+- **Charging network size is misleading.** The Netherlands has the densest network in the EU (2.8 BEVs per point), but only 3% of points are DC and there are 112 BEVs per HPC point, so a fast-charging gap remains.
+- **Ireland is the only shortlisted country below the AFIR minimum** (0.94): a clear supply gap, but also a sign that grid connections or permitting may be slowing investment.
+- **Germany is the largest market (2.0 million BEVs) but not the most attractive:** growth slowed to 5% a year after subsidies ended in December 2023, and its HPC coverage is already better than in most candidates. It ranks 7th.
+- **High BEV sales share does not mean a saturated market.** BEVs are 68% of new car sales in Denmark, but only about 90 per 1,000 inhabitants: the fleet will keep electrifying for years.
+
+## Scoring results (base case)
 
 | Rank | Country | Score (0–1) | Profile |
 | --- | --- | --- | --- |
@@ -25,35 +41,23 @@ Market entry analysis for an EV charging operator in Europe: country screening, 
 | 4 | Ireland | 0.547 | Largest gaps in HPC and AFIR compliance, but the smallest market with slow growth |
 | 5 | Belgium | 0.522 | Strong growth, but charging power already 3× the AFIR minimum |
 
-**Robustness:** across nine weight and method scenarios, only four countries ever reach the top 3: Denmark (8 of 9 scenarios), the Netherlands (7), Portugal (6) and Ireland (6). Denmark and the Netherlands are robust; the third place is contested between Portugal and Ireland and will be decided by market sizing.
-
-## Recommendation
-
-**Enter the Netherlands and Denmark first, with Portugal as the third market.**
-
-- **Netherlands:** the largest public fast-charging market of the finalists (€351M in 2030, base case), with a large HPC gap despite the densest AC network in the EU. Competition from established operators is the main risk.
-- **Denmark:** the most robust candidate in the scoring (top 3 in 8 of 9 scenarios and75% of 1,000 random weight sets), with the fastest BEV growth. Smaller market (€188M in 2030) and the lowest fast-charging price of the finalists.
-- **Portugal:** wins the tie-break with Ireland on market size (€126M vs €96M in 2030, base case, and larger in every scenario), with the largest HPC gap in the shortlist.
-- **Ireland:** the high-risk, high-reward option. It ranks first most often in random weight simulations but is the smallest market and the most sensitive to assumptions.
-  
-**Early findings**
-
-- **Charging network size is misleading.** The Netherlands has the densest network in the EU (2.8 BEVs per point), but only 3% of points are DC and there are 112 BEVs per HPC point, so a fast-charging gap remains.
-- **Ireland is the only shortlisted country below the AFIR minimum** (0.94): a clear supply gap, but also a sign that grid connections or permitting may be slowing investment.
-- **Germany is the largest market (2.0 million BEVs) but not the most attractive:** growth slowed to 5% a year after subsidies ended in December 2023, and its HPC coverage is already better than in most candidates. It ranks 7th.
-- **High BEV sales share does not mean a saturated market.** BEVs are 68% of new car sales in Denmark, but only about 90 per 1,000 inhabitants: the fleet will keep electrifying for years.
+**Robustness:** across nine weight and method scenarios, only four countries ever reach the top 3: Denmark (8 of 9 scenarios), the Netherlands (7), Portugal (6) and Ireland (6). Denmark and the Netherlands are robust; the third place is contested between Portugal and Ireland and is decided by market sizing.
 
 ## Dashboard
 
-Interactive Power BI report: [`dashboard/ev_market_entry.pbix`](dashboard/ev_market_entry.pbix)
+Interactive Power BI report: [`dashboard/ev_market_entry.pbix`](dashboard/ev_market_entry.pbix) · PDF version: [`dashboard/ev_market_entry.pdf`](dashboard/ev_market_entry.pdf)
 
 | Page | Question it answers | Main visuals |
 | --- | --- | --- |
 | 1. Overview | Where is EV demand growing, and where is fast charging lagging behind? | EU27 KPIs, map of BEVs per HPC point, growth vs HPC gap scatter |
 | 2. Ranking | Which markets are most attractive, and how robust is the ranking? | Score breakdown by criterion, Monte Carlo robustness, ranking summary table |
-| 3. Finalists | How big is the prize? | *Coming soon* |
+| 3. Finalists | How big is the prize? | 2030 market by scenario (base with low–high range), 2026–2030 growth, VoltaCharge revenue with an adjustable target-share slider, recommendation |
 
-Data model: a star schema with a country dimension (`dim_country`) linked to Eurostat, EAFO, scoring and market sizing tables; DAX measures for fleet, charging points and ratios.
+Data model: a star schema with a country dimension (`dim_country`) linked to Eurostat, EAFO, scoring and market sizing tables; DAX measures for fleet, charging points, ratios and market value; a what-if parameter for VoltaCharge's target share.
+
+![Overview](dashboard/screenshots/01_overview.png)
+![Ranking](dashboard/screenshots/02_ranking.png)
+![Finalists](dashboard/screenshots/03_finalists.png)
 
 ## Approach
 
@@ -137,14 +141,14 @@ Public DC charging market value, 2026–2030, in low, base and high scenarios.
 
 **Method:** BEV fleet is projected from 2025 by adding new BEV registrations each year (total registrations held at 2025 levels × BEV share rising linearly to a 2030 target). Market value = average BEV fleet × km per year × kWh per km × public DC share of charging energy × DC price per kWh.
 
-| Market 2030 (M€) | Low | Base | High |
+| Market 2030 (€M) | Low | Base | High |
 | --- | --- | --- | --- |
 | Netherlands | 213 | 351 | 511 |
 | Denmark | 120 | 188 | 260 |
 | Portugal | 72 | 126 | 192 |
 | Ireland | 53 | 96 | 150 |
 
-At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M in the Netherlands, €9.4M in Denmark, €6.3M in Portugal and €4.8M in Ireland.
+At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M in the Netherlands, €9.4M in Denmark, €6.3M in Portugal and €4.8M in Ireland (€38.1M in total).
 
 **Key assumptions**
 
@@ -162,11 +166,12 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 - **Portugal's market is 28–36% larger than Ireland's in every scenario**, assuming both evolve along comparable scenarios: it has more than twice the BEV fleet and almost twice the annual car sales. Ireland's higher mileage only partly offsets this.
 - **The Netherlands is the largest market, 1.8–2.0× Denmark.**
 - **Attractiveness and size point in different directions:** Denmark leads the scoring but is a smaller market with the cheapest fast charging. The choice between the two depends on competitive intensity and entry cost, which are not modelled.
-  
+
 ### 7. Next steps
-- Power BI dashboard and executive summary deck.
+
+- Executive summary deck.
 - Possible extensions: country-specific target shares based on competition, entry cost (capex per HPC site) and payback.
-- 
+
 ## Limitations
 
 - **Different reference dates:** BEV fleet is end-2025 (Eurostat); charging points are September 2026 (EAFO). BEVs per point is slightly understated for every country, so comparisons remain valid.
@@ -174,7 +179,7 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 - **PHEV data gaps:** many countries only report plug-in hybrids separately from 2020–2022 onwards. The analysis relies on BEV data, which is complete.
 - **Competition is not scored directly:** the AFIR gap and HPC gap are used as proxies for how under-served each market is.
 - **Market sizing uses constant 2026 prices including VAT:** values reflect what drivers spend, not the operator's net revenue.
-- **A uniform 5% target share** ignores differences in competition between countries; it likely overstates what a new entrant can win in the Netherlands.
+- **A uniform 5% target share** ignores differences in competition between countries; it likely overstates what a new entrant can win in the Netherlands. The dashboard includes a slider to test other values.
 - **BEV fleet projection** ignores scrappage (the fleet is young) and holds total car registrations at 2025 levels. Denmark, the Netherlands and Portugal use the EU average mileage.
 
 ## Data sources
@@ -195,12 +200,14 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 │   │   └── data_prep.xlsx        # Power Query: country_year and country_snapshot tables
 │   └── README.md                 # data notes and data dictionary
 ├── model/
-│   └── market_entry_model.xlsx   # assumptions, indicators, screening, scoring, notes
+│   └── market_entry_model.xlsx   # assumptions, indicators, screening, scoring, sensitivity, market sizing, notes
 ├── dashboard/
 │   ├── ev_market_entry.pbix      # Power BI report
-│   └── screenshots/              # page screenshots (coming soon)
+│   ├── ev_market_entry.pdf       # PDF export of the report
+│   └── screenshots/              # page screenshots
+└── deck/                         # executive summary slides (coming soon)
 ```
 
 ## Tools
 
-Power BI (Power Query, star schema, DAX measures)
+Excel (Power Query, XLOOKUP, SUMIFS, RRI, MMULT, dynamic arrays, conditional formatting) · Power BI (Power Query, star schema, DAX measures, what-if parameters)
