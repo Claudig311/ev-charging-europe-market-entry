@@ -2,7 +2,7 @@
 
 Market entry analysis for an EV charging operator in Europe: country screening, weighted scoring, sensitivity analysis, market sizing and Power BI dashboard.
 
-> **Status:** analysis and Power BI dashboard complete. Executive summary deck next.
+> 📄 **Executive summary deck:** [`deck/executive_summary.pdf`](deck/executive_summary.pdf) · 📊 **Dashboard:** [`dashboard/ev_market_entry.pdf`](dashboard/ev_market_entry.pdf)
 
 ## The client question
 
@@ -167,10 +167,8 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 - **The Netherlands is the largest market, 1.8–2.0× Denmark.**
 - **Attractiveness and size point in different directions:** Denmark leads the scoring but is a smaller market with the cheapest fast charging. The choice between the two depends on competitive intensity and entry cost, which are not modelled.
 
-### 7. Next steps
-
-- Executive summary deck.
-- Possible extensions: country-specific target shares based on competition, entry cost (capex per HPC site) and payback.
+### 7. Possible extensions
+- country-specific target shares based on competition, entry cost (capex per HPC site) and payback.
 
 ## Limitations
 
@@ -205,9 +203,10 @@ At a 5% target share, VoltaCharge's 2030 revenue (base case) would be €17.6M i
 │   ├── ev_market_entry.pbix      # Power BI report
 │   ├── ev_market_entry.pdf       # PDF export of the report
 │   └── screenshots/              # page screenshots
-└── deck/                         # executive summary slides (coming soon)
+└── deck/
+    └── executive_summary.pdf     # 9-slide executive summary
 ```
 
 ## Tools
 
-Excel (Power Query, XLOOKUP, SUMIFS, RRI, MMULT, dynamic arrays, conditional formatting) · Power BI (Power Query, star schema, DAX measures, what-if parameters)
+Excel (Power Query, XLOOKUP, SUMIFS, RRI, MMULT, dynamic arrays, conditional formatting) · Power BI (Power Query, star schema, DAX measures, what-if parameters) · PowerPoint
